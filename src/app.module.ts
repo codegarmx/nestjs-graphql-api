@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common'
+import { ConfigModule } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 
@@ -10,6 +11,11 @@ import { UsersModule } from './users/users.module'
 
 @Module({
   imports: [
+    // Config
+    ConfigModule.forRoot({
+      isGlobal: true,
+      cache: true,
+    }),
     // GraphQL
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
