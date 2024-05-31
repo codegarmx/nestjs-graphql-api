@@ -6,3 +6,8 @@ services:
       target: development
     volumes:
       - .:/usr/src/app
+    env_file:
+      - .env
+    command: npm run start:dev
+    ports:
+      - ${LISTENING_PORT}:${LISTENING_PORT}
