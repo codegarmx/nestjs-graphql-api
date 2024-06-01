@@ -1,4 +1,6 @@
 {
   "extends": "./tsconfig.json",
+  "watchFile": "dynamicPriorityPolling",
+  "watchDirectory": "dynamicPriorityPolling",
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
 }

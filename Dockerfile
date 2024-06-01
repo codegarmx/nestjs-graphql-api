@@ -1,4 +1,4 @@
-FROM node:18-slim AS base
+FROM node:alpine AS base
 
 # --- Development --- #
 FROM base AS development

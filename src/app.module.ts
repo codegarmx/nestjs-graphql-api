@@ -13,8 +13,12 @@ import { throttlerConfig, databaseConfig } from '@app/config'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 
+// Entity files (temporal)
+import { Task } from '@app/tasks/entities/task.entity'
+
 // Features imports
 import { UsersModule } from './users/users.module'
+import { TasksModule } from './tasks/tasks.module'
 
 @Module({
   imports: [
@@ -41,7 +45,8 @@ import { UsersModule } from './users/users.module'
         username: config.getOrThrow<string>('databaseConfig.username'),
         password: config.getOrThrow<string>('databaseConfig.password'),
         database: config.getOrThrow<string>('databaseConfig.database'),
-        entities: [__dirname + 'src/**/*.model{.ts, js}'],
+        entities: [Task],
+        //entities: [__dirname + 'src/**/*.model{.ts, js}'],
         synchronize: config.get('NODE_ENV') === 'production' ? false : true,
       }),
     }),
@@ -57,6 +62,7 @@ import { UsersModule } from './users/users.module'
       ],
     }),
     UsersModule,
+    TasksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
