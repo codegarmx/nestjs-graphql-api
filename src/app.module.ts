@@ -15,10 +15,12 @@ import { AppService } from './app.service'
 
 // Entity files (temporal)
 import { Task } from '@app/tasks/entities/task.entity'
+import { TaskStatus } from '@app/task-status/entities/task-status.entity'
 
 // Features imports
 import { UsersModule } from './users/users.module'
 import { TasksModule } from './tasks/tasks.module'
+import { TaskStatusModule } from './task-status/task-status.module'
 
 @Module({
   imports: [
@@ -45,7 +47,7 @@ import { TasksModule } from './tasks/tasks.module'
         username: config.getOrThrow<string>('databaseConfig.username'),
         password: config.getOrThrow<string>('databaseConfig.password'),
         database: config.getOrThrow<string>('databaseConfig.database'),
-        entities: [Task],
+        entities: [Task, TaskStatus],
         //entities: [__dirname + 'src/**/*.model{.ts, js}'],
         synchronize: config.get('NODE_ENV') === 'production' ? false : true,
       }),
@@ -63,6 +65,7 @@ import { TasksModule } from './tasks/tasks.module'
     }),
     UsersModule,
     TasksModule,
+    TaskStatusModule,
   ],
   controllers: [AppController],
   providers: [AppService],
