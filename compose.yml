@@ -11,3 +11,37 @@ services:
     command: npm run start:dev
     ports:
       - ${LISTENING_PORT}:${LISTENING_PORT}
+    depends_on:
+      - postgres
+  
+  postgres:
+    image: postgres
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - ${POSTGRES_LISTENING_PORT}:${POSTGRES_LISTENING_PORT}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_container
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "${PGADMIN_LISTENING_PORT}:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+
+volumes:
+  postgres-data:
+  pgadmin-data:
